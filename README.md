@@ -45,21 +45,20 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column          | Type    | Options     |
-| --------------- | ------- | ----------- |
-| image           | string  | null: false |
-| name            | string  | null: false |
-| description     | text    | null: false |
-| category        | string  | null: false |
-| condition       | string  | null: false |
-| delivery_charge | integer | null: false |
-| prefecture      | string  | null: false |
-| shipping_days   | string  | null: false |
-| price           | integer | null: false |
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| name               | string  | null: false |
+| description        | text    | null: false |
+| category_id        | integer | null: false |
+| condition_id       | integer | null: false |
+| delivery_charge_id | integer | null: false |
+| prefecture_id      | integer | null: false |
+| shipping_days_id   | integer | null: false |
+| price              | integer | null: false |
 
 ### Association
-- belongs_to :users
-- has_one :purchases
+- belongs_to :user
+- has_one :purchase
 
 ##  purchasesテーブル
 
@@ -70,22 +69,19 @@ Things you may want to cover:
 
 ### Association
 - has_one :address
-- has_one :items
-- belongs_to :users
+- belongs_to :item
+- belongs_to :user
 
 ## address テーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| credit_code   | string     |                                |
-| period        | string     | null: false, foreign_key: true |
-| sq_code       | string     | null: false, foreign_key: true |
-| post_code     | string     | null: false, foreign_key: true |
-| prefecture    | string     | null: false, foreign_key: true |
-| city          | string     | null: false, foreign_key: true |
-| house_number  | string     | null: false, foreign_key: true |
-| building_name | string     | null: false, foreign_key: true |
-| phone_number  | integer    | null: false, foreign_key: true |
+| Column        | Type    | Options      |
+| ------------- | ------- | ------------ |
+| post_code     | string  | null: false, |
+| prefecture_id | integer | null: false, |
+| city          | string  | null: false, |
+| house_number  | string  | null: false, |
+| building_name | string  | null: false, |
+| phone_number  | string  | null: false, |
 
 ### Association
-- has_one :purchases
+- belongs_to :purchase
