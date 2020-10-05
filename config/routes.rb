@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # ログイン新規登録に必要なルーティング自動でできる
+  resources :users
+  # とりあえず全てのアクション生成
 end
