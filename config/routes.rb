@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'items/index'
+  devise_for :users
+  # ログイン新規登録に必要なルーティング自動でできる
+  resources :users
+  # とりあえず全てのアクション生成
+  root to: "items#index"
 end
