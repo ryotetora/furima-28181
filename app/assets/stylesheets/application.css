@@ -13,10 +13,3 @@
  *= require_tree .
  *= require_self
  */
- 
- .second-header{
-   background-color: #f5f5f5;
-   display: flex;
- }
- 
-
