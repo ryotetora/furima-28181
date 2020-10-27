@@ -5,6 +5,17 @@ class ItemsController < ApplicationController
   end
 
   def create
+    @item = Item.new(item_params)
+    # if @item.save
+    #   redirect_to root_path
+    # else
+    #   render :new
+    # end
+  end
+
+
+  def new
+    @item = Item.new
   end
 
   # def move_to_index
@@ -14,8 +25,9 @@ class ItemsController < ApplicationController
   # end
   private
 
-  def message_params
-    params.require(:item).permit(:content, :image).merge(user_id: current_user.id)
+  def item_params
+    params.require(:item).permit(:category_id, :condition_id, :delivery_cfarge_id, :prefecture_id, :shipping_days_id)
   end
+  # これあってるか自信薄
 
 end
