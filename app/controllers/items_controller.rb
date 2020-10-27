@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  # before_action :move_to_index, except: [:index]
+  # ログインしていないと出品はできない
+  before_action :authenticate_user!, only:[:create,:new]
 
   def index
   end
