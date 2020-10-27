@@ -15,5 +15,5 @@ class Item < ApplicationRecord
   validates :category_id, :condition_id, :delivery_cfarge_id, :prefecture_id, :shipping_days_id, numericality: { other_than: 1 } 
   
   # 値段は半角数字のみ許可
-  validates :price, format: { with: /^[0-9]+$/, message: '半角数字を使用してください' }
+  validates :price, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' }
 end
