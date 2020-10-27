@@ -4,9 +4,18 @@ class ItemsController < ApplicationController
   def index
   end
 
+  def create
+  end
+
   # def move_to_index
   #   unless user_signed_in?
   #     redirect_to action: :index
   #   end
   # end
+  private
+
+  def message_params
+    params.require(:item).permit(:content, :image).merge(user_id: current_user.id)
+  end
+
 end
