@@ -12,8 +12,8 @@ class Item < ApplicationRecord
   validates :name, :description, :category, :condition, :delivery_charge, :prefecture, :shipping_days, :price, presence: true
 
   #選択が「--」の時は保存できないようにする
-  validates :category_id, :condition_id, :delivery_cfarge_id, :prefecture_id, :shipping_days_id, numericality: { other_than: 1 } 
+  validates :category_id, :condition_id, :delivery_charge_id, :prefecture_id, :shipping_days_id, numericality: { other_than: 1 } 
   
-  # 値段は半角数字のみ許可
-  validates :price, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' }
+  # 値段は半角数字のみ許可このバリデうまくいってないようなのであとで修正する
+  # validates :price, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' }
 end
