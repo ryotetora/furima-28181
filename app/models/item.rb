@@ -1,21 +1,24 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+
   belongs_to_active_hash :category
   belongs_to_active_hash :condition
   belongs_to_active_hash :delivery_charge
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :shipping_days
+  # activehashアソシエーション
 
   has_one_attached :image
+  # activestorageアソシエーション
 
-  belongs_to :user
+  # belongs_to :user
 
-  #空の投稿を保存できないようにする
-  validates :name, :description, :category, :condition, :delivery_charge, :prefecture, :shipping_days, :price, presence: true
+  validates :image, :name, :description, :category, :condition, :delivery_charge, :prefecture, :shipping_days, :price, presence: true
+    #空の投稿を保存できない
 
-  #選択が「--」の時は保存できないようにする
   validates :category_id, :condition_id, :delivery_charge_id, :prefecture_id, :shipping_days_id, numericality: { other_than: 1 } 
-  
-  # 値段は半角数字のみ許可このバリデうまくいってないようなのであとで修正する
-  # validates :price, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' }
+#選択が1の「--」の時は保存できない
+
+  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is out of setting range"}
+  # 数値のみ許可、入力可能最小値、最大値設定
 end
