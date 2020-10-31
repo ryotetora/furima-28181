@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   # ログインしていないと出品はできない
-  before_action :authenticate_user!, only:[:create,:new]
+  before_action :authenticate_user!, only: [:create, :new]
 
   def index
   end
@@ -15,7 +15,6 @@ class ItemsController < ApplicationController
     end
   end
 
-
   def new
     @item = Item.new
   end
@@ -28,8 +27,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:image,:user,:name,:description, :category_id, :condition_id, :delivery_charge_id, :prefecture_id, :shipping_days_id,:price).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :user, :name, :description, :category_id, :condition_id, :delivery_charge_id, :prefecture_id, :shipping_days_id, :price).merge(user_id: current_user.id)
     # ストロングパラメータで出品者、商品情報を取得
   end
-
 end
