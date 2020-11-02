@@ -5,6 +5,7 @@
 
 require("@rails/ujs").start()
 // require("turbolinks").start()
+// 動作を高速化するgem 一部発火の妨げになるようなので一時コメントアウト
 require("@rails/activestorage").start()
 require("channels")
 require("../item_price");

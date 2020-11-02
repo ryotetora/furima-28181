@@ -11,7 +11,8 @@ class Item < ApplicationRecord
   has_one_attached :image
   # activestorageアソシエーション
 
-  # belongs_to :user
+  belongs_to :user
+  # userモデルとのアソシエーション
 
   validates :image, :name, :description, :category, :condition, :delivery_charge, :prefecture, :shipping_days, :price, presence: true
   # 空の投稿を保存できない

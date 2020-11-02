@@ -33,18 +33,48 @@ describe Item do
         @item.valid?
         expect(@item.errors.full_messages).to include('Category 項目が未選択です')
       end
+      it 'categoryが未選択では登録できない' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Category 項目が未選択です')
+      end
       it 'conditionが空では登録できない' do
         @item.condition_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include('Condition 項目が未選択です')
+      end
+      it 'conditionが未選択では登録できない' do
+        @item.condition_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Condition 項目が未選択です')
+      end
+      it 'prefectureが空では登録できない' do
+        @item.prefecture_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Prefecture 項目が未選択です')
+      end
+      it 'prefectureが未選択では登録できない' do
+        @item.prefecture_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Prefecture 項目が未選択です')
       end
       it 'delivery_chargeが空では登録できない' do
         @item.delivery_charge_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include('Delivery charge 項目が未選択です')
       end
+      it 'delivery_chargeが未選択では登録できない' do
+        @item.delivery_charge_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Delivery charge 項目が未選択です')
+      end
       it 'shipping_daysが空では登録できない' do
         @item.shipping_days_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Shipping days 項目が未選択です')
+      end
+      it 'shipping_daysが未選択では登録できない' do
+        @item.shipping_days_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Shipping days 項目が未選択です')
       end
