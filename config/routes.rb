@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :users
   # とりあえず全てのアクション生成
   root to: "items#index"
+
+  resources :items
 end
