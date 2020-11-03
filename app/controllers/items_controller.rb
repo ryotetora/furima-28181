@@ -3,6 +3,8 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new]
 
   def index
+    @items = Item.all
+    #  全レコード情報をもつインスタンス変数を生成
   end
 
   def create
