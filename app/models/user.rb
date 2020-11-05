@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :items
   # itemモデルとのアソシエーション
-  
+
   #  各モジュール
   with_options presence: true do
     validates :nickname
