@@ -1,12 +1,18 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new]
   # ログインしていないと出品はできない
+  before_action :set_item, only: [:edit, :show]
+  # 同一アクションをまとめる
 
   def index
     @items = Item.all.order('created_at DESC')
     #  全レコード情報をもつインスタンス変数を生成、並びを降順指定
   end
 
+  def new
+    @item = Item.new
+  end
+  
   def create
     @item = Item.new(item_params)
     if @item.save
@@ -18,11 +24,9 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def update
@@ -36,15 +40,14 @@ class ItemsController < ApplicationController
     end
   end
 
-
-  def new
-    @item = Item.new
-  end
-
   private
 
   def item_params
     params.require(:item).permit(:image, :user, :name, :description, :category_id, :condition_id, :delivery_charge_id, :prefecture_id, :shipping_days_id, :price).merge(user_id: current_user.id)
     # ストロングパラメータで出品者、商品情報を取得
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 end
