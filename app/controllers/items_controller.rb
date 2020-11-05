@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new]
-    # ログインしていないと出品はできない
-    
+  # ログインしていないと出品はできない
+
   def index
-    @items = Item.all.order("created_at DESC")
+    @items = Item.all.order('created_at DESC')
     #  全レコード情報をもつインスタンス変数を生成、並びを降順指定
   end
 
@@ -15,6 +15,10 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    @item = Item.find(params[:id])
   end
 
   def new
