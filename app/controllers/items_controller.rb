@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new]
   # ログインしていないと出品はできない
+  before_action :set_item, only: [:edit, :show, :update]
+  # 同一アクションをまとめる
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -22,17 +24,14 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
     redirect_to root_path unless current_user.id == @item.user_id
-    # ログイン中のユーザーと商品の出品者が違うならTOP画面にとばす
+    # ログインユーザーと出品者が違うならTOPにとばす
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to item_path
     # 編集保存成功すれば、詳細にとばす
@@ -49,4 +48,8 @@ class ItemsController < ApplicationController
     # ストロングパラメータで出品者、商品情報を取得
   end
 
+  def set_item
+    @item = Item.find(params[:id])
+    # 同じ記述をまとめるメソッド
+  end
 end
