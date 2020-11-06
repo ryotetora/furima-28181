@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new]
   # ログインしていないと出品はできない
-  before_action :item_params_find, only: [:edit, :show, :update, :destroy]
+  before_action :set_item, only: [:edit, :show, :update, :destroy]
   before_action :same_user_check, only: [:edit, :destroy]
   # 同一アクションをまとめる
 
@@ -54,7 +54,7 @@ class ItemsController < ApplicationController
     # ストロングパラメータで出品者、商品情報を取得
   end
 
-  def item_params_find
+  def set_item
     @item = Item.find(params[:id])
     # 同じ記述をまとめるメソッド
   end
