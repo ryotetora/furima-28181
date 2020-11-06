@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new]
   # ログインしていないと出品はできない
-  before_action :set_first, only: [:edit, :show, :update, :destroy]
-  before_action :set_second, only: [:edit, :destroy]
+  before_action :item_params_find, only: [:edit, :show, :update, :destroy]
+  before_action :same_user_check, only: [:edit, :destroy]
   # 同一アクションをまとめる
 
   def index
@@ -54,11 +54,11 @@ class ItemsController < ApplicationController
     # ストロングパラメータで出品者、商品情報を取得
   end
 
-  def set_first
+  def item_params_find
     @item = Item.find(params[:id])
     # 同じ記述をまとめるメソッド
   end
-  def set_second
+  def same_user_check
     redirect_to root_path unless current_user.id == @item.user_id
     # ログインユーザーと出品者が違うならTOPにとばす
   end
