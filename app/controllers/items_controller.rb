@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new]
   # ログインしていないと出品はできない
-  before_action :set_item, only: [:edit, :show, :update]
+  before_action :set_items, only: [:edit, :show, :update, :destroy]
   # 同一アクションをまとめる
 
   def index
@@ -41,6 +41,13 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+      # 削除に成功すればrootにとばす
+    end
+  end
+
   private
 
   def item_params
@@ -48,7 +55,7 @@ class ItemsController < ApplicationController
     # ストロングパラメータで出品者、商品情報を取得
   end
 
-  def set_item
+  def set_items
     @item = Item.find(params[:id])
     # 同じ記述をまとめるメソッド
   end
