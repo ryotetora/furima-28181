@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new]
   # ログインしていないと出品はできない
-  before_action :set_item, only: [:edit, :show, :update]
+  before_action :set_item, only: [:edit, :show, :update, :destroy]
+  before_action :same_user_check, only: [:edit, :destroy]
   # 同一アクションをまとめる
 
   def index
@@ -27,8 +28,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path unless current_user.id == @item.user_id
-    # ログインユーザーと出品者が違うならTOPにとばす
   end
 
   def update
@@ -38,6 +37,13 @@ class ItemsController < ApplicationController
     else
       render :edit
       # 失敗すれば編集冒頭にとばす
+    end
+  end
+
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+      # 削除に成功すればrootにとばす
     end
   end
 
@@ -51,5 +57,9 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
     # 同じ記述をまとめるメソッド
+  end
+  def same_user_check
+    redirect_to root_path unless current_user.id == @item.user_id
+    # ログインユーザーと出品者が違うならTOPにとばす
   end
 end
