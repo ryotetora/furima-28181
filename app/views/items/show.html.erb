@@ -32,7 +32,7 @@
     <%# 商品が売れていない場合購入を表示 %>
     <% elsif user_signed_in? && @item.present? %>
     <%# 購入機能を実装後に取得可能かどうかで表示にきりかえる %>
-    <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
+    <%= link_to '購入画面に進む', orders_path ,class:"item-red-btn"%>
     <% end %>
     <%# //商品が売れていない場合購入を表示 %>
 
