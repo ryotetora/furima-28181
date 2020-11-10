@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :items
-  # itemモデルとのアソシエーション
+  has_many :orders
+  # 各モデルとのアソシエーション
 
   #  各モジュール
   with_options presence: true do
