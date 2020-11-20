@@ -10,20 +10,31 @@ class OrdersController < ApplicationController
     @order_address = OrderAddress.new(order_params)
     
     if @order_address.valid?
+       pay_item
        @order_address.save
-       redirect_to action: :index
+       redirect_to items_path
+      #  購入できたらTOPにとばす
     else
-       render action: :index
+       render :index
+      #  購入できなければ冒頭にとばす
     end
   end
 
   private
 
   def order_params
-    params.require(:order_address).permit(:post_code, :prefecture_id, :city, :house_number, :phone_number, :building_name).merge(user_id: current_user.id,item_id: @item.id)
-# order_addressで許可したカラムと同様
+      params.require(:order_address).permit(:post_code, :prefecture_id, :city, :house_number, :phone_number, :building_name).merge(user_id: current_user.id,item_id: @item.id,token: params[:token])
+# order_addressで許可したカラムと同様、入力されてこない情報はmergeして取得
   end
 
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # PAY.JPテスト秘密鍵、環境変数
+      Payjp::Charge.create(
+        amount: @item[:price],       # 商品の値段
+        card: order_params[:token],  # トークン
+        currency: 'jpy'              # 通貨の種類（日本円）
+    )
+  end
 
 
 end
