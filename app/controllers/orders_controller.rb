@@ -1,4 +1,9 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:index]
+  # ログインしていないと購入はできない
+  before_action :sold_out_item, only: [:index]
+  # 購入済み商品の購入ページへはいけない
+
   def index
     @item = Item.find(params[:item_id])
     # 一度item_idを定義しないと使用できなかったので定義
@@ -36,5 +41,12 @@ class OrdersController < ApplicationController
     )
   end
 
+  def sold_out_item
+    @item = Item.find(params[:item_id])
+    if @item.order.present?
+       redirect_to root_path
+      #  購入済み商品の購入ページへ行こうとするとTOPにとばす
+    end
+  end
 
 end
