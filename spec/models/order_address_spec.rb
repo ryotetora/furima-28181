@@ -20,17 +20,17 @@ describe OrderAddress do
       it 'post_cideにハイフンが含まれなければ登録できない' do
         @order_address.post_code = '0-0'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+        expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
       it 'prefecture_idが空では登録できない' do
         @order_address.prefecture_id = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Prefecture 項目が未選択です")
+        expect(@order_address.errors.full_messages).to include('Prefecture 項目が未選択です')
       end
       it 'prefectureが未選択では登録できない' do
         @order_address.prefecture_id = 1
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Prefecture 項目が未選択です")
+        expect(@order_address.errors.full_messages).to include('Prefecture 項目が未選択です')
       end
       it 'cityが空では登録できない' do
         @order_address.city = ''
@@ -56,7 +56,7 @@ describe OrderAddress do
         @order_address.phone_number = '000000000000'
         @order_address.phone_number = '000000000000'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+        expect(@order_address.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
       it 'tokenが空では登録できない' do
         @order_address.token = ''

@@ -58,6 +58,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     # 同じ記述をまとめるメソッド
   end
+
   def same_user_check
     redirect_to root_path unless current_user.id == @item.user_id
     # ログインユーザーと出品者が違うならTOPにとばす
