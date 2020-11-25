@@ -3,17 +3,14 @@ class OrdersController < ApplicationController
   # ログインしていないと購入はできない
   before_action :sold_out_item, only: [:index]
   # 購入済み商品の購入ページへはいけない
-
+  before_action :set_item, only: [:index, :create, :sold_out_item]
+  # 定義したitem_idをインスタンス変数に
   def index
-    @item = Item.find(params[:item_id])
-    # 一度item_idを定義しないと使用できなかったので定義
     @order_address = OrderAddress.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new(order_params)
-
     if @order_address.valid?
       pay_item
       @order_address.save
@@ -42,10 +39,14 @@ class OrdersController < ApplicationController
   end
 
   def sold_out_item
-    @item = Item.find(params[:item_id])
     if @item.order.present?
       redirect_to root_path
       #  購入済み商品の購入ページへ行こうとするとTOPにとばす
     end
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+    # 同じ記述をまとめるメソッド、定義したitem_idをインスタンス変数に
   end
 end
