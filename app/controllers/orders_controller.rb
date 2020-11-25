@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   # ログインしていないと購入はできない
   before_action :sold_out_item, only: [:index]
   # 購入済み商品の購入ページへはいけない
-  before_action :set_item, only: [:index, :create, :sold_out_item]
+  before_action :set_item, only: [:index, :create]
   # 定義したitem_idをインスタンス変数に
   def index
     @order_address = OrderAddress.new
@@ -39,6 +39,7 @@ class OrdersController < ApplicationController
   end
 
   def sold_out_item
+    @item = Item.find(params[:item_id])
     if @item.order.present?
       redirect_to root_path
       #  購入済み商品の購入ページへ行こうとするとTOPにとばす
