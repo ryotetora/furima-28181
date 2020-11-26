@@ -3,6 +3,8 @@ class OrdersController < ApplicationController
   # ログインしていないと購入はできない
   before_action :sold_out_item, only: [:index]
   # 購入済み商品の購入ページへはいけない
+  before_action :seller_of_item_return, only: [:index, :create]
+  # 出品者は自身の商品の購入ページへ行けない
   before_action :set_item, only: [:index, :create]
   # 定義したitem_idをインスタンス変数に
   def index
@@ -49,5 +51,13 @@ class OrdersController < ApplicationController
   def set_item
     @item = Item.find(params[:item_id])
     # 同じ記述をまとめるメソッド、定義したitem_idをインスタンス変数に
+  end
+
+  def seller_of_item_return
+    @item = Item.find(params[:item_id])
+    if current_user.id == @item.user_id
+      redirect_to root_path
+      # 出品者は自身の商品の購入ページへ行けない
+    end
   end
 end
