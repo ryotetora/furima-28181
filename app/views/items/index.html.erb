@@ -134,13 +134,12 @@
         <%# 商品詳細追加の時にリンク追加 %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
-
-          <%# 購入機能実装後条件文を追加し表示をかえる %>
+          <% if item.order.present? %>
+          <%# 商品が購入済みの場合、sold out表示する %>
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
-          <%# 購入機能実装後条件文を追加し表示をかえる %>
-
+          <% end %>
           </div>
         <div class='item-info'>
           <h3 class='item-name'>

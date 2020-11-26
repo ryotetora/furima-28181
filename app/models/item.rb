@@ -12,7 +12,8 @@ class Item < ApplicationRecord
   # activestorageアソシエーション
 
   belongs_to :user
-  # userモデルとのアソシエーション
+  has_one :order
+  # 各モデルとのアソシエーション
 
   validates :image, :name, :description, :category, :condition, :delivery_charge, :prefecture, :shipping_days, :price, presence: true
   # 空の投稿を保存できない

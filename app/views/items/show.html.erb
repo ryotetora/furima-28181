@@ -8,11 +8,13 @@
     </h2>
     <div class='item-img-content'>
       <%= image_tag @item.image ,class:"item-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
+
+      <% if @item.order.present? %>
+      <%# 商品が購入済みの場合、sold out表示する %>
       <div class='sold-out'>
         <span>Sold Out!!</span>
       </div>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
+      <% end %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -24,18 +26,16 @@
     </div>
 
     <% if user_signed_in? && current_user.id == @item.user_id %>
-    <%# ログイン済みかつ、自身と商品のuser_idが一致しているか確認 %>
+    <%# ログイン中かつ、自身と商品のuser_idが一致しているか確認 %>
     <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
     <p class='or-text'>or</p>
     <%= link_to '削除', "/items/#{@item.id}", method: :delete, class:'item-destroy' %>
-
-    <%# 商品が売れていない場合購入を表示 %>
-    <% elsif user_signed_in? && @item.present? %>
-    <%# 購入機能を実装後に取得可能かどうかで表示にきりかえる %>
-    <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
     <% end %>
-    <%# //商品が売れていない場合購入を表示 %>
-
+    
+    <% if user_signed_in? && @item.order.nil? && current_user.id != @item.user_id %>
+    <%# ログイン中かつ、出品中の商品であり、自分の出品商品ではない場合 %>
+    <%= link_to '購入画面に進む', item_orders_path(@item.id), class:"item-red-btn"%>
+    <% end %>
 
     <div class="item-explain-box">
       <span><%= @item.description %></span>
