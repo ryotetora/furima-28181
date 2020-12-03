@@ -4,7 +4,12 @@ ja:
    attributes:
      user:
     #  新規登録時のエラー文
-       nickname: ニックネーム
+       nickname:           ニックネーム
+       first_name:         お名前(姓)
+       last_name:          お名前(名)
+       first_name_kana:    お名前カナ(姓)
+       last_name_kana:     お名前カナ(名)
+       birthday:           生年月日
      item:
     #  出品時のエラー文
        name:               商品名
