@@ -16,7 +16,7 @@ describe Item do
       it 'imageが空では登録できない' do
         @item.image = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Image can't be blank")
+        expect(@item.errors.full_messages).to include("Image を選択してください")
       end
       it 'nameが空では登録できない' do
         @item.name = ''
@@ -31,52 +31,52 @@ describe Item do
       it 'categoryが空では登録できない' do
         @item.category_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include('Category 項目が未選択です')
+        expect(@item.errors.full_messages).to include('Category の項目が未選択です')
       end
       it 'categoryが未選択では登録できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Category 項目が未選択です')
+        expect(@item.errors.full_messages).to include('Category の項目が未選択です')
       end
       it 'conditionが空では登録できない' do
         @item.condition_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include('Condition 項目が未選択です')
+        expect(@item.errors.full_messages).to include('Condition の項目が未選択です')
       end
       it 'conditionが未選択では登録できない' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Condition 項目が未選択です')
+        expect(@item.errors.full_messages).to include('Condition の項目が未選択です')
       end
       it 'prefectureが空では登録できない' do
         @item.prefecture_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include('Prefecture 項目が未選択です')
+        expect(@item.errors.full_messages).to include('Prefecture の項目が未選択です')
       end
       it 'prefectureが未選択では登録できない' do
         @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Prefecture 項目が未選択です')
+        expect(@item.errors.full_messages).to include('Prefecture の項目が未選択です')
       end
       it 'delivery_chargeが空では登録できない' do
         @item.delivery_charge_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include('Delivery charge 項目が未選択です')
+        expect(@item.errors.full_messages).to include('Delivery charge の項目が未選択です')
       end
       it 'delivery_chargeが未選択では登録できない' do
         @item.delivery_charge_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Delivery charge 項目が未選択です')
+        expect(@item.errors.full_messages).to include('Delivery charge の項目が未選択です')
       end
       it 'shipping_daysが空では登録できない' do
         @item.shipping_days_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include('Shipping days 項目が未選択です')
+        expect(@item.errors.full_messages).to include('Shipping days の項目が未選択です')
       end
       it 'shipping_daysが未選択では登録できない' do
         @item.shipping_days_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Shipping days 項目が未選択です')
+        expect(@item.errors.full_messages).to include('Shipping days の項目が未選択です')
       end
       it 'priceが空では登録できない' do
         @item.price = ''
@@ -86,17 +86,17 @@ describe Item do
       it 'priceが全角数字では登録できない' do
         @item.price = '２０００'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is invalid. Input half-width characters.')
+        expect(@item.errors.full_messages).to include('Price は半角数字で入力してください')
       end
       it 'priceが300円未満では登録できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is out of setting range')
+        expect(@item.errors.full_messages).to include('Price は300〜9,999,999の間で入力してください')
       end
       it 'priceが10,000,000円を超過すると登録できない' do
         @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is out of setting range')
+        expect(@item.errors.full_messages).to include('Price は300〜9,999,999の間で入力してください')
       end
     end
   end

@@ -1,0 +1,33 @@
+ja:
+# gemでカバーできない変換を記述
+ activerecord:
+   attributes:
+     user:
+    #  新規登録時のエラー文
+       nickname:           ニックネーム
+       first_name:         お名前(姓)
+       last_name:          お名前(名)
+       first_name_kana:    お名前カナ(姓)
+       last_name_kana:     お名前カナ(名)
+       birthday:           生年月日
+     item:
+    #  出品時のエラー文
+       name:               商品名
+       image:              画像
+       description:        商品の説明
+       price:              販売価格
+       category_id:        カテゴリー
+       condition_id:       商品の状態
+       delivery_charge_id: 配送料の負担
+       prefecture_id:      発送元の地域
+       shipping_days_id:   発送までの日数
+ activemodel:
+   attributes:
+      order_address:
+    #  購入時のエラー文、formオブジェクト使用しているのでactivemodelで指定
+       city:               市区町村
+       house_number:       番地
+       post_code:          郵便番号
+       phone_number:       電話番号
+       prefecture_id:      都道府県
+       token:              クレジットカード情報
