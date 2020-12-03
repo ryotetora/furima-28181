@@ -26,6 +26,6 @@ class Item < ApplicationRecord
 
   validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'は300〜9,999,999の間で入力してください' }
   # 入力可能最小値、最大値設定
-  validates :price, numericality: { only_integer: true, message: 'を半角数字で入力してください' }
+  validates :price, numericality: { only_integer: true, message: 'は半角数字で入力してください' }
   # 半角数値のみ許可
 end
