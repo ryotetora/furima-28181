@@ -1,3 +1,4 @@
+if (document.URL.match( /new/ )) {
 // 金額idをpriceInput変数に格納
 window.addEventListener('load', function(){
 const priceInput = document.getElementById("item-price");
@@ -13,5 +14,5 @@ priceInput.addEventListener("input", () => {
   profit.innerHTML = Math.floor(inputValue - tax);
   // 利益計算
 })
-
 })
+}

@@ -9,7 +9,11 @@ require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
 require("../item_price");
+// 利益、手数料自動計算のファイル読み込み
 require("../card")
+// クレジット関連のファイル読み込み
+require('./preview')
+// 画像プレビューのためのファイル読み込み
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
