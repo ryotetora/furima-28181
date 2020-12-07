@@ -1,3 +1,5 @@
+if (document.URL.match( /orders/ )) {
+  // 適用するページを出品時に限定
 const pay = () => {
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY); // PAY.JPテスト公開鍵
   const form = document.getElementById("charge-form");
@@ -42,3 +44,4 @@ const pay = () => {
   });
 };
 window.addEventListener("load", pay);
+}
